@@ -104,13 +104,13 @@ $pkg_cmd -D eslint prettier
 echo
 echo -e "2/5 ${YELLOW}Conforming to Airbnb's JavaScript Style Guide... ${NC}"
 echo
-$pkg_cmd -D eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-import eslint-plugin-react babel-eslint
+$pkg_cmd -D eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-import eslint-plugin-react babel-eslint babel-preset-airbnb
 
 echo
 echo -e "3/5 ${LCYAN}Making ESlint and Prettier play nice with each other... ${NC}"
 echo "See https://github.com/prettier/eslint-config-prettier for more details."
 echo
-$pkg_cmd -D eslint-config-prettier eslint-plugin-prettier
+$pkg_cmd -D eslint-config-prettier eslint-plugin-prettier 
 
 
 if [ "$skip_eslint_setup" == "true" ]; then
@@ -121,58 +121,56 @@ else
   > ".eslintrc${config_extension}" # truncates existing file (or creates empty)
 
   echo ${config_opening}'
-  {
-  "env": {
-    "browser": true,
-    "node": true,
-    "jest": true
-  },
+ {
   "extends": [
-    "plugin:jsx-a11y/recommended",
-    "eslint:recommended",
-    "next/core-web-vitals",
+    "airbnb",
+    "plugin:prettier/recommended",
     "prettier"
   ],
-  "root": true,
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 12,
-    "allowImportExportEverywhere": true,
-    "sourceType": "module"
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jest": true,
+    "node": true
   },
-  "plugins": ["react", "jsx-a11y", "import"],
   "rules": {
+    "arrow-parens": 0,
     "camelcase": [
       "off",
       {
         "ignoreDestructuring": true,
-        "allow": ["UNSAFE_componentWillMount"]
+        "allow": [
+          "UNSAFE_componentWillMount"
+        ]
       }
     ],
     "comma-dangle": "off",
     "eqeqeq": "off",
     "global-require": 0,
-    "linebreak-style": ["error", "unix"],
-    "max-len": "off",
-    "no-console": 1,
-    "no-underscore-dangle": ["error", { "allow": ["_id", "__typename", "__schema"] }],
-    "no-param-reassign": 0,
-    "no-shadow": "off",
-    "object-curly-newline": "off",
-    "indent": ["error", 2, { "SwitchCase": 1 }],
-    "import/no-unresolved": [2, { "commonjs": true }],
-    "import/extensions": ["error", "never", { "json": "always" }],
+    "import/order": 2,
     "import/no-dynamic-require": "off",
+    "import/no-extraneous-dependencies": [
+      "off"
+    ],
     "import/prefer-default-export": "off",
+    "import/extensions": "off",
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
     "jsx-a11y/anchor-is-valid": "off",
-    "jsx-a11y/media-has-caption": "off",
     "jsx-a11y/label-has-associated-control": [
       "error",
       {
         "required": {
-          "some": ["nesting", "id"]
+          "some": [
+            "nesting",
+            "id"
+          ]
         }
       }
     ],
@@ -180,51 +178,65 @@ else
       "error",
       {
         "required": {
-          "some": ["nesting", "id"]
+          "some": [
+            "nesting",
+            "id"
+          ]
         }
       }
     ],
-    "jsx-quotes": ["error", "prefer-double"],
-    "quotes": ["error", "single"],
+    "jsx-a11y/media-has-caption": "off",
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "max-len": "off",
+    "no-console": 1,
+    "no-nested-ternary": "off",
+    "no-param-reassign": 0,
+    "no-shadow": "off",
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allow": [
+          "_id",
+          "__typename",
+          "__schema"
+        ]
+      }
+    ],
+    "object-curly-newline": "off",
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "react/forbid-prop-types": "off",
+    "react/jsx-filename-extension": [
+      2,
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    ],
+    "react/jsx-one-expression-per-line": 0,
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-uses-react": "off",
     "react/jsx-uses-vars": "error",
     "react/no-array-index-key": "off",
-    "react/forbid-prop-types": "off",
-    "react/jsx-one-expression-per-line": 0,
-    "react/no-find-dom-node": 1,
-    "react/jsx-uses-react": "off",
-    "react/no-string-refs": 1,
     "react/no-danger": "off",
-    "react/prop-types": 2,
+    "react/no-find-dom-node": 1,
+    "react/no-string-refs": 1,
     "react/react-in-jsx-scope": "off",
-    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
-    "react/jsx-props-no-spreading": "off",
-    "semi": ["error", "always"]
-  },
-  "settings": {
-    "import/resolver": {
-      "alias": {
-        "map": [
-          ["@/lib", "./lib/"],
-          ["@/components", "./components/"],
-          ["@/context", "./context/"],
-          ["@/constants", "./constants.js"],
-          ["@/theme", "./theme/"],
-          ["@/theme.config", "./theme.config"],
-          ["@/utils", "./utils/"],
-          ["@/hooks", "./hooks/"],
-          ["@/error", "./pages/_error.jsx"],
-          ["@/queries", "./lib/queries/"],
-          ["@/data", "./data/"],
-          ["@/views", "./views/"]
-        ],
-        "extensions": [".js", ".jsx", ".json"]
-      },
-      "node": {
-        "moduleDirectory": ["node_modules", "src/"]
-      }
-    }
-  }
-}' >> .eslintrc${config_extension}
+    "react/require-default-props": 2,
+    "semi": [
+      "error",
+      "always"
+    ]
+  }' >> .eslintrc${config_extension}
 fi
 
 

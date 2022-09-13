@@ -149,8 +149,8 @@ else
     "import/prefer-default-export": "off",
     "import/extensions": "off",
     "indent": [
-      2,
       "error",
+      2,
       {
         "SwitchCase": 1
       }

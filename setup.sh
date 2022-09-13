@@ -121,12 +121,8 @@ else
   > ".eslintrc${config_extension}" # truncates existing file (or creates empty)
 
   echo ${config_opening}'
- {
-  "extends": [
-    "airbnb",
-    "plugin:prettier/recommended",
-    "prettier"
-  ],
+{
+  "extends": ["airbnb", "plugin:prettier/recommended", "prettier"],
   "env": {
     "browser": true,
     "commonjs": true,
@@ -136,13 +132,12 @@ else
   },
   "rules": {
     "arrow-parens": 0,
+    "consistent-return": "off",
     "camelcase": [
       "off",
       {
         "ignoreDestructuring": true,
-        "allow": [
-          "UNSAFE_componentWillMount"
-        ]
+        "allow": ["UNSAFE_componentWillMount"]
       }
     ],
     "comma-dangle": "off",
@@ -150,14 +145,12 @@ else
     "global-require": 0,
     "import/order": 2,
     "import/no-dynamic-require": "off",
-    "import/no-extraneous-dependencies": [
-      "off"
-    ],
+    "import/no-extraneous-dependencies": ["off"],
     "import/prefer-default-export": "off",
     "import/extensions": "off",
     "indent": [
-      "error",
       2,
+      "error",
       {
         "SwitchCase": 1
       }
@@ -167,10 +160,7 @@ else
       "error",
       {
         "required": {
-          "some": [
-            "nesting",
-            "id"
-          ]
+          "some": ["nesting", "id"]
         }
       }
     ],
@@ -178,18 +168,12 @@ else
       "error",
       {
         "required": {
-          "some": [
-            "nesting",
-            "id"
-          ]
+          "some": ["nesting", "id"]
         }
       }
     ],
     "jsx-a11y/media-has-caption": "off",
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
+    "linebreak-style": ["error", "unix"],
     "max-len": "off",
     "no-console": 1,
     "no-nested-ternary": "off",
@@ -198,28 +182,16 @@ else
     "no-underscore-dangle": [
       "error",
       {
-        "allow": [
-          "_id",
-          "__typename",
-          "__schema"
-        ]
+        "allow": ["_id", "__typename", "__schema", "_heartbeat"]
       }
     ],
     "object-curly-newline": "off",
-    "quotes": [
-      "error",
-      "single"
-    ],
+    "quotes": ["error", "single"],
     "react/forbid-prop-types": "off",
     "react/jsx-filename-extension": [
       2,
       {
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".ts",
-          ".tsx"
-        ]
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     ],
     "react/jsx-one-expression-per-line": 0,
@@ -232,11 +204,9 @@ else
     "react/no-string-refs": 1,
     "react/react-in-jsx-scope": "off",
     "react/require-default-props": 2,
-    "semi": [
-      "error",
-      "always"
-    ]
-  }' >> .eslintrc${config_extension}
+    "semi": ["error", "always"]
+  }
+}' >> .eslintrc${config_extension}
 fi
 
 

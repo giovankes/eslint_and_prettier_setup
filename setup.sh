@@ -104,7 +104,7 @@ $pkg_cmd -D eslint prettier
 echo
 echo -e "2/5 ${YELLOW}Conforming to Airbnb's JavaScript Style Guide... ${NC}"
 echo
-$pkg_cmd -D eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-import eslint-plugin-react babel-eslint babel-preset-airbnb
+$pkg_cmd -D eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-import eslint-plugin-react  @babel/eslint-parser babel-preset-airbnb
 
 echo
 echo -e "3/5 ${LCYAN}Making ESlint and Prettier play nice with each other... ${NC}"
@@ -128,6 +128,10 @@ else
     "es6": true,
     "jest": true,
     "node": true
+  },
+  "parser":"@babel/eslint-parser",
+  "parserOptions": {
+  "ecmaVersion": 2020 
   },
   "rules": {
     "arrow-parens": 0,

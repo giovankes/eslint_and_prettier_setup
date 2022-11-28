@@ -104,13 +104,13 @@ $pkg_cmd -D eslint prettier
 echo
 echo -e "2/5 ${YELLOW}Conforming to Airbnb's JavaScript Style Guide... ${NC}"
 echo
-$pkg_cmd -D eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-import eslint-plugin-react  @babel/eslint-parser babel-preset-airbnb
+$pkg_cmd -D eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-import eslint-plugin-react  @babel/eslint-parser babel-preset-airbnb @babel/core @babel/plugin-transform-runtime
 
 echo
 echo -e "3/5 ${LCYAN}Making ESlint and Prettier play nice with each other... ${NC}"
 echo "See https://github.com/prettier/eslint-config-prettier for more details."
 echo
-$pkg_cmd -D eslint-config-prettier eslint-plugin-prettier 
+$pkg_cmd -D eslint-config-prettier eslint-plugin-prettier eslint-config-airbnb/hooks
 
 
 if [ "$skip_eslint_setup" == "true" ]; then
@@ -121,7 +121,7 @@ else
   > ".eslintrc${config_extension}" # truncates existing file (or creates empty)
 
   echo ${config_opening}'
-  "extends": ["airbnb", "plugin:prettier/recommended", "prettier"],
+  "extends": ["airbnb", "airbnb/hooks", "plugin:prettier/recommended", "prettier"],
   "env": {
     "browser": true,
     "commonjs": true,

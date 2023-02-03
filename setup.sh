@@ -105,14 +105,13 @@ $pkg_cmd -D eslint prettier
 echo
 echo -e "2/5 ${YELLOW}Conforming to Airbnb's JavaScript Style Guide... ${NC}"
 echo
-$pkg_cmd -D eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-import eslint-plugin-react @babel/eslint-parser babel-preset-airbnb
+$pkg_cmd -D eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-import eslint-plugin-react  @babel/eslint-parser babel-preset-airbnb @babel/core @babel/plugin-transform-runtime
 
 echo
 echo -e "3/5 ${LCYAN}Making ESlint and Prettier play nice with each other... ${NC}"
 echo "See https://github.com/prettier/eslint-config-prettier for more details."
 echo
-$pkg_cmd -D eslint-config-prettier eslint-plugin-prettier 
-
+$pkg_cmd -D eslint-config-prettier eslint-plugin-prettier eslint-plugin-react-hooks
 
 if [ "$skip_eslint_setup" == "true" ]; then
   break
@@ -122,7 +121,12 @@ else
   > ".eslintrc${config_extension}" # truncates existing file (or creates empty)
 
   echo ${config_opening}'
-  "extends": ["airbnb", "plugin:prettier/recommended", "prettier"],
+   "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "plugin:prettier/recommended",
+    "prettier"
+  ],
   "env": {
     "browser": true,
     "commonjs": true,
@@ -130,9 +134,13 @@ else
     "jest": true,
     "node": true
   },
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "plugins": ["jest-dom"],
   "rules": {
     "arrow-parens": 0,
-    "consistent-return": "off",
     "camelcase": [
       "off",
       {
@@ -140,6 +148,10 @@ else
         "allow": ["UNSAFE_componentWillMount"]
       }
     ],
+    "jest-dom/prefer-checked": "error",
+    "jest-dom/prefer-enabled-disabled": "error",
+    "jest-dom/prefer-required": "error",
+    "jest-dom/prefer-to-have-attribute": "error",
     "comma-dangle": "off",
     "eqeqeq": "off",
     "global-require": 0,
@@ -174,7 +186,7 @@ else
     ],
     "jsx-a11y/media-has-caption": "off",
     "linebreak-style": ["error", "unix"],
-    "max-len": "off",
+    "max-len": ["error", { "code": 120, "tabWidth": 2 }],
     "no-console": 1,
     "no-nested-ternary": "off",
     "no-param-reassign": 0,
@@ -204,9 +216,9 @@ else
     "react/no-string-refs": 1,
     "react/react-in-jsx-scope": "off",
     "react/require-default-props": 2,
+    "react/function-component-definition": "off",
     "semi": ["error", "always"]
-  }
-}' >> .eslintrc${config_extension}
+  }}' >> .eslintrc${config_extension}
 fi
 
 

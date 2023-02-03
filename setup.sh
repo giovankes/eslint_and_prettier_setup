@@ -96,7 +96,7 @@ fi
 # ----------------------
 echo
 echo -e "${GREEN}Configuring your development environment... ${NC}"
-
+echo $pkg_cmd
 echo
 echo -e "1/5 ${LCYAN}ESLint & Prettier Installation... ${NC}"
 echo
@@ -110,7 +110,7 @@ echo
 echo -e "2/5 ${YELLOW}Conforming to Airbnb's JavaScript Style Guide... ${NC}"
 echo
 if [$pkg_cmd == 'bun install'];then 
-$pkg_cmd  eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-import eslint-plugin-react  @babel/eslint-parser babel-preset-airbnb @babel/core @babel/plugin-transform-runtime
+$pkg_cmd eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-import eslint-plugin-react  @babel/eslint-parser babel-preset-airbnb @babel/core @babel/plugin-transform-runtime
 else
 $pkg_cmd -D eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-import eslint-plugin-react  @babel/eslint-parser babel-preset-airbnb @babel/core @babel/plugin-transform-runtime
 fi

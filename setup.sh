@@ -16,10 +16,11 @@ NC='\033[0m' # No Color
 # Package Manager Prompt
 echo
 echo "Which package manager are you using?"
-select package_command_choices in "Yarn" "npm" "Cancel"; do
+select package_command_choices in "yarn" "npm" "bun" "Cancel"; do
   case $package_command_choices in
     Yarn ) pkg_cmd='yarn add'; break;;
     npm ) pkg_cmd='npm install --legacy-peer-deps'; break;;
+    bun ) pkg_cmd='bun install'; break;;
     Cancel ) exit;;
   esac
 done

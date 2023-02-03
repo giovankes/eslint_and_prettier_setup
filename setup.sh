@@ -131,14 +131,11 @@ else
     "browser": true,
     "commonjs": true,
     "es6": true,
-    "jest": true,
     "node": true
   },
-  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "ecmaVersion": 2020
   },
-  "plugins": ["jest-dom"],
   "rules": {
     "arrow-parens": 0,
     "camelcase": [
@@ -148,10 +145,6 @@ else
         "allow": ["UNSAFE_componentWillMount"]
       }
     ],
-    "jest-dom/prefer-checked": "error",
-    "jest-dom/prefer-enabled-disabled": "error",
-    "jest-dom/prefer-required": "error",
-    "jest-dom/prefer-to-have-attribute": "error",
     "comma-dangle": "off",
     "eqeqeq": "off",
     "global-require": 0,

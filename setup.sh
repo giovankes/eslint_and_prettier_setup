@@ -27,8 +27,6 @@ done
 echo
 
 # File Format Prompt
-echo $package_command_choices 
-echo $pkg_cmd
 echo "Which ESLint and Prettier configuration format do you prefer?"
 select config_extension in ".js" ".json" "Cancel"; do
   case $config_extension in

@@ -28,6 +28,7 @@ echo
 
 # File Format Prompt
 echo $package_command_choices 
+echo $pkg_cmd
 echo "Which ESLint and Prettier configuration format do you prefer?"
 select config_extension in ".js" ".json" "Cancel"; do
   case $config_extension in
@@ -101,7 +102,7 @@ echo $pkg_cmd
 echo
 echo -e "1/5 ${LCYAN}ESLint & Prettier Installation... ${NC}"
 echo
-if [$package_command_choices == "bun"]; then 
+if [$pkg_cmd == "bun install"]; then 
   $pkg_cmd eslint prettier 
 else
   $pkg_cmd -D eslint prettier
@@ -110,7 +111,7 @@ fi
 echo
 echo -e "2/5 ${YELLOW}Conforming to Airbnb's JavaScript Style Guide... ${NC}"
 echo
-if [$package_command_choices == 'bun'];then 
+if [$pkg_cmd == 'bun install'];then 
 $pkg_cmd eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-import eslint-plugin-react  @babel/eslint-parser babel-preset-airbnb @babel/core @babel/plugin-transform-runtime
 else
 $pkg_cmd -D eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-import eslint-plugin-react  @babel/eslint-parser babel-preset-airbnb @babel/core @babel/plugin-transform-runtime
@@ -120,7 +121,7 @@ echo
 echo -e "3/5 ${LCYAN}Making ESlint and Prettier play nice with each other... ${NC}"
 echo "See https://github.com/prettier/eslint-config-prettier for more details."
 echo
-if [$package_command_choices == 'bun']; then
+if [$pkg_cmd == 'bun install']; then
 $pkg_cmd  eslint-config-prettier eslint-plugin-prettier eslint-plugin-react-hooks
 else
 $pkg_cmd -D eslint-config-prettier eslint-plugin-prettier eslint-plugin-react-hooks
